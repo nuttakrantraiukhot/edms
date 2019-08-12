@@ -85,7 +85,7 @@ class View extends \Gcms\View
             /* ส่วนหัวของตาราง และการเรียงลำดับ (thead) */
             'headers' => array(
                 'create_date' => array(
-                    'text' => '{LNG_date}',
+                    'text' => '{LNG_Date}',
                 ),
                 'document_no' => array(
                     'text' => '{LNG_Document No.}',

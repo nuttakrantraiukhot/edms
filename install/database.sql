@@ -33,10 +33,10 @@ CREATE TABLE `{prefix}_language` (
 CREATE TABLE `{prefix}_category` (
   `id` int(11) NOT NULL,
   `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `category_id` int(11) NOT NULL,
+  `category_id` int(11) DEFAULT 0,
   `topic` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `color` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `published` tinyint(1) NOT NULL DEFAULT '1'
+  `published` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --

@@ -31,7 +31,7 @@ return array(
   'Created' => 'สร้างเมื่อ',
   'Currency unit' => 'สกุลเงิน',
   'Current staff' => 'พนักงานปัจจุบัน',
-  'date' => 'วันที่',
+  'Date' => 'วันที่',
   'DATE_FORMAT' => 'd M Y เวลา H:i น.',
   'DATE_LONG' => array(
     0 => 'อาทิตย์',

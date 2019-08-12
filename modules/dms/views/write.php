@@ -60,7 +60,7 @@ class View extends \Gcms\View
             'id' => 'create_date',
             'labelClass' => 'g-input icon-calendar',
             'itemClass' => 'item',
-            'label' => '{LNG_date}',
+            'label' => '{LNG_Date}',
             'value' => isset($index->create_date) ? $index->create_date : date('Y-m-d'),
         ));
         $category = \Dms\Category\Model::init();

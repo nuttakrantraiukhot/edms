@@ -37,7 +37,7 @@ class View extends \Gcms\View
         $content .= '<div class="table fullwidth">';
         $content .= '<p class=tr><span class="td item icon-number">{LNG_Document No.}</span><span class="td item">:</span><span class="td item">'.$index->document_no.'</span></p>';
         $content .= '<p class=tr><span class="td item icon-file">{LNG_Document title}</span><span class="td item">:</span><span class="td item">'.$index->topic.'</span></p>';
-        $content .= '<p class=tr><span class="td item icon-calendar">{LNG_date}</span><span class="td item">:</span><span class="td item">'.Date::format($index->create_date, 'd M Y').'</span></p>';
+        $content .= '<p class=tr><span class="td item icon-calendar">{LNG_Date}</span><span class="td item">:</span><span class="td item">'.Date::format($index->create_date, 'd M Y').'</span></p>';
         $content .= '<p class=tr><span class="td item icon-edit">{LNG_Detail}</span><span class="td item">:</span><span class="td item">'.nl2br($index->detail).'</span></p>';
         $content .= '</div>';
         foreach (\Dms\View\Model::files($index->id, $login) as $item) {

@@ -84,9 +84,8 @@ class View extends \Gcms\View
                     'class' => 'center',
                 ),
                 'create_date' => array(
-                    'text' => '{LNG_date}',
+                    'text' => '{LNG_Date}',
                 ),
-
             ),
             /* รูปแบบการแสดงผลของคอลัมน์ (tbody) */
             'cols' => array(

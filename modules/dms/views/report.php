@@ -58,7 +58,7 @@ class View extends \Gcms\View
                     'text' => '{LNG_Name}',
                 ),
                 'last_update' => array(
-                    'text' => '{LNG_date}',
+                    'text' => '{LNG_Date}',
                     'class' => 'center',
                 ),
                 'downloads' => array(

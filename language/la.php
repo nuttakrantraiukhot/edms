@@ -31,7 +31,7 @@ return array(
   'Created' => 'ສ້າງເມື່ອ',
   'Currency unit' => 'ສະກຸນເງິນ',
   'Current staff' => 'ພະນັກງານປະຈຸບັນ',
-  'date' => 'ວັນທີ',
+  'Date' => 'ວັນທີ',
   'DATE_FORMAT' => 'd M Y ເວລາ H:i ນ.',
   'DATE_LONG' => array(
     0 => 'ອາທິດ',
@@ -189,6 +189,10 @@ return array(
   'Prename' => 'ຄຳນຳໜ້າຊື່',
   'Profile' => 'ຂໍ້ມູນສ່ວນຕົວ',
   'Province' => 'ແຂວງ',
+  'PUBLISHEDS' => array(
+    0 => 'ໂຈະການພິມເຜີຍແຜ່',
+    1 => 'ເຜີຍແຜ່'
+  ),
   'Register' => 'ສະໝັກສະມາຊິກ',
   'Remove' => 'ລຶບ',
   'Repassword' => 'ຢືນຢັນລະຫັດຜ່ານ',

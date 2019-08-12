@@ -68,6 +68,10 @@ return array(
   'PERMISSIONS' => array(
     'can_config' => 'Can configure the system'
   ),
+  'PUBLISHEDS' => array(
+    0 => 'Unpublished',
+    1 => 'Published'
+  ),
   'SEXES' => array(
     'f' => 'Female',
     'm' => 'Male'
