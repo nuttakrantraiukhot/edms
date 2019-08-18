@@ -141,18 +141,18 @@ INSERT INTO `{prefix}_user` (`id`, `username`, `salt`, `password`, `token`, `sta
 (2, 'demo@localhost', '5c13b4c610781', 'd61303ebed15f6448dd3ebadd7e416b5350b4d1d', NULL, 0, '', 'ตัวอย่าง', 'f', '', '', '0123456788', '102', '', 0, 0, '', '::1', NOW(), 1, 0);
 
 --
--- Indexes for table `{prefix}_language`
---
-ALTER TABLE `{prefix}_language`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `{prefix}_category`
 --
 ALTER TABLE `{prefix}_category`
   ADD PRIMARY KEY (`id`),
   ADD KEY `type` (`type`),
   ADD KEY `category_id` (`category_id`);
+
+--
+-- Indexes for table `{prefix}_language`
+--
+ALTER TABLE `{prefix}_language`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `{prefix}_user`
