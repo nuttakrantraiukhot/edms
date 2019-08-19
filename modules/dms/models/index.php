@@ -107,12 +107,12 @@ class Model extends \Kotchasan\Model
                             // บันทึกรายละเอียดการดาวน์โหลดลง SESSION
                             $_SESSION[$id] = array(
                                 'file' => $file,
-                                'name' => $result->name.'.'.$result->ext,
+                                'name' => self::$cfg->dms_download_action == 1 ? '' : $result->name.'.'.$result->ext,
                                 'size' => $result->size,
                                 'mime' => self::$cfg->dms_download_action == 1 ? \Kotchasan\Mime::get($result->ext) : 'application/octet-stream',
                             );
                             // คืนค่า
-                            $ret['location'] = WEB_URL.'modules/dms/filedownload.php?id='.$id;
+                            $ret['open'] = WEB_URL.'modules/dms/filedownload.php?id='.$id;
                         } else {
                             // ไม่พบไฟล์
                             $ret['alert'] = Language::get('File not found');
