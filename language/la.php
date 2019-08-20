@@ -8,6 +8,7 @@ return array(
   'All :count entries, displayed :start to :end, page :page of :total pages' => 'ທັງໝົດ :count ລາຍການ, ສະແດງ :start ເຖິງ :end, ໜ້າທີ່ :page ຈາກທັງໝົດ:total ໜ້າ',
   'all items' => 'ທັງໝົດ',
   'Authentication require' => 'ການກວດກາຄວາມຖືກຕ້ອງ',
+  'Background color' => 'ສີພື້ນຫລັງ',
   'Background image' => 'ພາບພື້ນຫລັງ',
   'BOOLEANS' => array(
     0 => 'ປິດໃຊ້ວຽກ',
@@ -112,10 +113,12 @@ return array(
   'Leave empty for generate auto' => 'ປ່ອຍໃຫ້ເປົ່າເພື່ອສ້າງແບບອັດຕະໂນມັດ',
   'Limit access to only one account per member. Members who have logged in before will be forced to log out.' => 'ຈໍາກັດການເຂົ້າເຖິງບັນຊີຫນຶ່ງ ສະມາຊິກທີ່ເຂົ້າສູ່ລະບົບກ່ອນຈະຖືກບັງຄັບໃຫ້ອອກຈາກລະບົບ.',
   'List of' => 'ລາຍການ',
+  'Login' => 'ເຂົ້າສູ່ລະບົບ',
   'Login information' => 'ຂໍ້ມູນການເຂົ້າລະບົບ',
   'Login per one account' => 'ເຂົ້າສູ່ລະບົບຕໍ່ຫນຶ່ງບັນຊີ',
   'Login with an existing account' => 'ເຂົ້າລະບົບດ້ວຍບັນຊີສະມາຊິກທີ່ມີຢູ່ແລ້ວ',
   'Logo' => 'ໂລໂກ',
+  'Logout' => 'ອອກຈາກລະບົບ',
   'Logout successful' => 'ອອກຈາກລະບົບຮຽບຮ້ອຍ',
   'Mail program' => 'ໂປຮແກຮມສົ່ງອີເມວ',
   'Mail server' => 'ເຊີບເວີອີເມວ',
@@ -208,8 +211,6 @@ return array(
   ),
   'Short description about your website' => 'ຂໍ້ຄວາມສັ້ນໆ ອະທິບາຍວ່າເປັນເວັບໄຊກ່ຽວກັບຫຍັງ',
   'Show' => 'ສະແດງ',
-  'Sign in' => 'ເຂົ້າສູ່ລະບົບ',
-  'Sign out' => 'ອອກຈາກລະບົບ',
   'Site Name' => 'ຊື່ຂອງເວັບໄຊ',
   'Site settings' => 'ຕັ້ງຄ່າເວັບໄຊ',
   'size of' => 'ຂະໜາດຂອງ',
@@ -255,7 +256,7 @@ return array(
   'With selected' => 'ເຮັດກັບທີ່ເລືອກ',
   'YEAR_OFFSET' => 543,
   'You want to' => 'ທ່ານຕ້ອງການ',
-  'Your message was sent successfully' => 'ສົ່ງຂໍ້ຄວາມໄປຍັງຜູ້ຮັບຮຽບຮ້ອຍແລ້ວ',
+  'Your message was sent successfully' => 'ສົ່ງຂໍ້ຄວາມໄປຫາບຸກຄົນທີ່ກ່ຽວຂ້ອງ.',
   'Your new password is' => 'ລະຫັດຜ່ານໃໝ່ຂອງທ່ານຄື',
   'Zipcode' => 'ລະຫັດໄປສະນີ'
 );
