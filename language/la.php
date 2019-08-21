@@ -182,7 +182,6 @@ return array(
   'please select' => 'ກະລຸນາເລືອກ',
   'Please select :name at least one item' => 'ກະລຸນາເລືອກ :name ຢ່າງໜ້ອຍ 1 ລາຍການ',
   'Port' => 'ພອດ',
-  'Prename' => 'ຄຳນຳໜ້າຊື່',
   'Profile' => 'ຂໍ້ມູນສ່ວນຕົວ',
   'Province' => 'ແຂວງ',
   'PUBLISHEDS' => array(
@@ -228,7 +227,6 @@ return array(
   'Status' => 'ສະຖານະ',
   'Status for general members' => 'ສະຖານະສຳລັບສະມາຊິກທົ່ວໄປ',
   'Style' => 'ຮູບແບບ',
-  'successfully copied to clipboard' => 'ສຳເນົາໄປຍັງຄິບບອດຮຽບຮ້ອຍແລ້ວ',
   'The file size larger than the limit' => 'ຂະໜາດຂອງແຟ້ມໃຫຍ່ກວ່າທີ່ກຳນົດ',
   'The members status of the site' => 'ສະຖານະຂອງສະມາຂິກຂອງເວັບໄຊ',
   'The name of the mail server as localhost or smtp.gmail.com (To change the settings of your email is the default. To remove this box entirely.)' => 'ຊື່ຂອງເມວເຊີບເວີເຊັ່ນ localhost หรือ chitdpt@gmail.com (ຕ້ອງປ່ຽນຄ່າກຳນົດຂອງອີເມວທັງໝົດເປັນຄ່າເລີ່ມຕົ້ນ ໃຫ້ລຶບຂໍ້ຄວາມໃນຊ່ອງນີ້ອອກທັງໝົດ)',
@@ -256,7 +254,7 @@ return array(
   'With selected' => 'ເຮັດກັບທີ່ເລືອກ',
   'YEAR_OFFSET' => 543,
   'You want to' => 'ທ່ານຕ້ອງການ',
-  'Your message was sent successfully' => 'ສົ່ງຂໍ້ຄວາມໄປຫາບຸກຄົນທີ່ກ່ຽວຂ້ອງ.',
+  'Your message was sent successfully' => 'ສົ່ງຂໍ້ຄວາມສຳເລັດໄປຫາຜູ້ທີ່ກ່ຽວຂ້ອງ',
   'Your new password is' => 'ລະຫັດຜ່ານໃໝ່ຂອງທ່ານຄື',
   'Zipcode' => 'ລະຫັດໄປສະນີ'
 );

@@ -33,7 +33,7 @@ class View extends \Gcms\View
     {
         $content = '';
         $content .= '<article class=modal_detail>';
-        $content .= '<header><h3 class=icon-file>{LNG_Details of} {LNG_Document}</h3></header>';
+        $content .= '<header><h1 class=icon-file>{LNG_Details of} {LNG_Document}</h1></header>';
         $content .= '<div class="table fullwidth">';
         $content .= '<p class=tr><span class="td item icon-number">{LNG_Document No.}</span><span class="td item">:</span><span class="td item">'.$index->document_no.'</span></p>';
         $content .= '<p class=tr><span class="td item icon-file">{LNG_Document title}</span><span class="td item">:</span><span class="td item">'.$index->topic.'</span></p>';

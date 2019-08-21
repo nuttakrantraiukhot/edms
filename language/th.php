@@ -182,7 +182,6 @@ return array(
   'please select' => 'กรุณาเลือก',
   'Please select :name at least one item' => 'กรุณาเลือก :name อย่างน้อย 1 รายการ',
   'Port' => 'พอร์ต',
-  'Prename' => 'คำนำหน้าชื่อ',
   'Profile' => 'ข้อมูลส่วนตัว',
   'Province' => 'จังหวัด',
   'PUBLISHEDS' => array(
@@ -228,7 +227,6 @@ return array(
   'Status' => 'สถานะ',
   'Status for general members' => 'สถานะสำหรับสมาชิกทั่วไป',
   'Style' => 'รูปแบบ',
-  'successfully copied to clipboard' => 'สำเนาไปยังคลิปบอร์ดเรียบร้อยแล้ว',
   'The file size larger than the limit' => 'ขนาดของไฟล์ใหญ่กว่าที่กำหนด',
   'The members status of the site' => 'สถานะของสมาชิกของเว็บไซต์',
   'The name of the mail server as localhost or smtp.gmail.com (To change the settings of your email is the default. To remove this box entirely.)' => 'ชื่อของเมล์เซิร์ฟเวอร์ เช่น localhost หรือ smtp.gmail.com (ต้องการเปลี่ยนค่ากำหนดของอีเมลทั้งหมดเป็นค่าเริ่มต้น ให้ลบข้อความในช่องนี้ออกทั้งหมด)',

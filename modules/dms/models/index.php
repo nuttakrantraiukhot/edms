@@ -73,34 +73,39 @@ class Model extends \Kotchasan\Model
                 $action = $request->post('action')->toString();
                 if ($action == 'detail') {
                     // แสดงรายละเอียดของเอกสาร
-                    $document = \Dms\View\Model::get($request->post('id')->toInt(), $login);
+                    $document = \Dms\View\Model::get($request->post('id')->toInt());
                     if ($document) {
                         $ret['modal'] = Language::trans(createClass('Dms\View\View')->render($document, $login));
                     }
                 } elseif ($action == 'download') {
                     // อ่านรายการที่เลือก
                     $result = $this->db()->createQuery()
-                        ->from('dms_files F')
-                        ->join('dms_download D', 'LEFT', array(array('D.file_id', 'F.id'), array('D.member_id', (int) $login['id'])))
-                        ->where(array('F.id', $request->post('id')->toInt()))
-                        ->groupBy('F.id')
-                        ->first('D.id', 'F.id file_id', 'F.dms_id', 'D.downloads', 'F.size', 'F.name', 'F.file', 'F.ext');
+                        ->from('dms_files')
+                        ->where(array('id', $request->post('id')->toInt()))
+                        ->first('id', 'dms_id', 'size', 'name', 'file', 'ext');
                     if ($result) {
                         // ไฟล์
                         $file = ROOT_PATH.DATA_FOLDER.$result->file;
                         if (is_file($file)) {
                             // สามารถดาวน์โหลดได้
+                            $download = $this->db()->createQuery()
+                                ->from('dms_download')
+                                ->where(array(
+                                    array('file_id', $result->id),
+                                    array('member_id', (int) $login['id']),
+                                ))
+                                ->first('id', 'downloads');
                             $save = array(
-                                'downloads' => $result->downloads + 1,
+                                'downloads' => $download ? $download->downloads + 1 : 1,
                                 'dms_id' => $result->dms_id,
-                                'file_id' => $result->file_id,
+                                'file_id' => $result->id,
                                 'member_id' => $login['id'],
                                 'last_update' => date('Y-m-d H:i:s'),
                             );
-                            if (empty($result->id)) {
-                                $this->db()->insert($this->getTableName('dms_download'), $save);
+                            if ($download) {
+                                $this->db()->update($this->getTableName('dms_download'), $download->id, $save);
                             } else {
-                                $this->db()->update($this->getTableName('dms_download'), $result->id, $save);
+                                $this->db()->insert($this->getTableName('dms_download'), $save);
                             }
                             // id สำหรบไฟล์ดาวน์โหลด
                             $id = uniqid();

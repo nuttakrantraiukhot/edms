@@ -21,14 +21,13 @@ class Model extends \Kotchasan\Model
 {
     /**
      * อ่านเอกสารที่ $id
-     * ไม่พบ คืนค่า null.
+     * ไม่พบ คืนค่า null
      *
-     * @param int   $id
-     * @param array $login
+     * @param int $id
      *
      * @return object
      */
-    public static function get($id, $login)
+    public static function get($id)
     {
         return static::createQuery()
             ->from('dms A')
@@ -47,12 +46,18 @@ class Model extends \Kotchasan\Model
      */
     public static function files($id, $login)
     {
+        $sql = static::createQuery()
+            ->select('D.downloads')
+            ->from('dms_download D')
+            ->where(array(
+                array('D.file_id', 'F.id'),
+                array('D.member_id', $login['id']),
+            ));
+
         return static::createQuery()
-            ->select('F.topic', 'F.ext', 'D.downloads')
+            ->select('F.topic', 'F.ext', array($sql, 'downloads'))
             ->from('dms_files F')
-            ->join('dms_download D', 'LEFT', array(array('D.file_id', 'F.id'), array('D.member_id', $login['id'])))
             ->where(array('F.dms_id', $id))
-            ->groupBy('F.id')
             ->cacheOn()
             ->execute();
     }
