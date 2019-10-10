@@ -27,6 +27,13 @@ class Category
      * @var array
      */
     protected $categories = array();
+    /**
+     * true รายการทั้งหมด
+     * false เฉพาะรายการที่เผยแพร่
+     *
+     * @var bool
+     */
+    protected $all = true;
 
     /**
      * อ่านรายชื่อประเภทหมวดหมู่ที่สามารถใช้งานได้
@@ -35,7 +42,30 @@ class Category
      */
     public function typies()
     {
+        return empty($this->categories) ? array() : array_keys($this->categories);
+    }
+
+    /**
+     * คืนค่าประเภทหมวดหมู่
+     *
+     * @return array
+     */
+    public function items()
+    {
         return $this->categories;
+    }
+
+    /**
+     * คืนค่าชื่อหมวดหมู่
+     * ไม่พบคืนค่าว่าง
+     *
+     * @param string $type
+     *
+     * @return string
+     */
+    public function name($type)
+    {
+        return isset($this->categories[$type]) ? $this->categories[$type] : '';
     }
 
     /**
@@ -46,16 +76,26 @@ class Category
      */
     public static function init()
     {
+        // create object
         $obj = new static();
-        // Query
-        $query = \Kotchasan\Model::createQuery()
-            ->select('category_id', 'topic', 'type')
-            ->from('category')
-            ->where(array('type', $obj->typies()))
-            ->order('category_id')
-            ->cacheOn();
-        foreach ($query->execute() as $item) {
-            $obj->datas[$item->type][$item->category_id] = $item->topic;
+        $typies = $obj->typies();
+        if (!empty($typies)) {
+            $where = array(
+                array('type', $typies),
+            );
+            if (!$obj->all) {
+                $where[] = array('published', 1);
+            }
+            // Query
+            $query = \Kotchasan\Model::createQuery()
+                ->select('category_id', 'topic', 'type')
+                ->from('category')
+                ->where($where)
+                ->order('category_id')
+                ->cacheOn();
+            foreach ($query->execute() as $item) {
+                $obj->datas[$item->type][$item->category_id] = $item->topic;
+            }
         }
 
         return $obj;
@@ -86,5 +126,24 @@ class Category
     public function get($type, $category_id)
     {
         return empty($this->datas[$type][$category_id]) ? '' : $this->datas[$type][$category_id];
+    }
+
+    /**
+     * คืนค่าคีย์รายการแรกสุด
+     * ไม่พบคืนค่า NULL
+     *
+     * @param string $type
+     *
+     * @return int|null
+     */
+    public function getFirstKey($type)
+    {
+        if (isset($this->datas[$type])) {
+            reset($this->datas[$type]);
+
+            return key($this->datas[$type]);
+        }
+
+        return null;
     }
 }

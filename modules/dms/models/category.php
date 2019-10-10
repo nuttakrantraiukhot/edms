@@ -27,6 +27,6 @@ class Model extends \Gcms\Category
     public function __construct()
     {
         // ชื่อหมวดหมู่
-        $this->categories = array_keys(Language::get('DMS_CATEGORIES'));
+        $this->categories = Language::get('DMS_CATEGORIES');
     }
 }

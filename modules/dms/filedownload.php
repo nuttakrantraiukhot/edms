@@ -14,18 +14,32 @@
 if (isset($_GET['id']) && isset($_SESSION[$_GET['id']])) {
     $file = $_SESSION[$_GET['id']];
     if (is_file($file['file'])) {
-        // ดาวน์โหลดไฟล์
-        header('Cache-Control: public, must-revalidate');
-        header('Pragma: no-cache');
-        header('Content-Type: '.$file['mime']);
-        header('Content-Length: '.$file['size']);
-        if ($file['name'] != '') {
-            header('Content-Disposition: attachment; filename='.$file['name']);
+        $f = @fopen($file['file'], 'rb');
+        if ($f) {
+            // ดาวน์โหลดไฟล์
+            header('Pragma: public');
+            header('Expires: -1');
+            header('Cache-Control: public, must-revalidate, post-check=0, pre-check=0');
+            if ($file['name'] != '') {
+                header('Content-Disposition: attachment; filename="'.$file['name'].'"');
+            } else {
+                header('Content-Disposition: inline;');
+            }
+            header('Content-Type: '.$file['mime']);
+            header('Content-Length: '.$file['size']);
+            header('Accept-Ranges: bytes');
+            while (!feof($f)) {
+                echo @fread($f, 8192);
+                ob_flush();
+                flush();
+                if (connection_status() != 0) {
+                    @fclose($f);
+                    exit;
+                }
+            }
+            fclose($f);
+            exit;
         }
-        header('Content-Transfer-Encoding: binary');
-        header('Accept-Ranges: bytes');
-        readfile($file['file']);
-        exit;
     }
 }
 header('HTTP/1.0 404 Not Found');

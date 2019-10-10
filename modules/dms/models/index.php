@@ -110,12 +110,18 @@ class Model extends \Kotchasan\Model
                             // id สำหรบไฟล์ดาวน์โหลด
                             $id = uniqid();
                             // บันทึกรายละเอียดการดาวน์โหลดลง SESSION
-                            $_SESSION[$id] = array(
+                            $file = array(
                                 'file' => $file,
-                                'name' => self::$cfg->dms_download_action == 1 ? '' : $result->name.'.'.$result->ext,
                                 'size' => $result->size,
-                                'mime' => self::$cfg->dms_download_action == 1 ? \Kotchasan\Mime::get($result->ext) : 'application/octet-stream',
                             );
+                            if (self::$cfg->dms_download_action == 1 && in_array($result->ext, array('pdf', 'jpg', 'jpeg', 'png', 'gif'))) {
+                                $file['name'] = '';
+                                $file['mime'] = \Kotchasan\Mime::get($result->ext);
+                            } else {
+                                $file['name'] = $result->name.'.'.$result->ext;
+                                $file['mime'] = 'application/octet-stream';
+                            }
+                            $_SESSION[$id] = $file;
                             // คืนค่า
                             $ret['open'] = WEB_URL.'modules/dms/filedownload.php?id='.$id;
                         } else {

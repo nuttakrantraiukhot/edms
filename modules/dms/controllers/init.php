@@ -47,7 +47,9 @@ class Controller extends \Kotchasan\KBase
                 'url' => 'index.php?module=dms-setup',
             );
         }
-        $menu->addTopLvlMenu('dms', '{LNG_Document management system}', null, $submenus, 'module');
+        if (!empty($submenus)) {
+            $menu->addTopLvlMenu('dms', '{LNG_Document management system}', null, $submenus, 'module');
+        }
         // เมนูตั้งค่า
         $submenus = array();
         if (Login::checkPermission($login, 'can_manage_dms')) {

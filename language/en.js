@@ -1,6 +1,7 @@
 var CANCEL = 'Cancel';
 var CHANGE_COLOR = 'change color';
 var CHECK = 'check';
+var CHECKBOX = 'Checkbox';
 var DELETE = 'delete';
 var DISABLE = 'Disable';
 var ENABLE = 'Enable';
