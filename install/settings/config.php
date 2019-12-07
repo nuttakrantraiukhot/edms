@@ -3,7 +3,7 @@
 /* config.php */
 
 return array(
-    'version' => '2.0.8',
+    'version' => '2.1.0',
     'web_title' => 'eDms',
     'web_description' => 'ระบบการจัดการเอกสารอิเล็กทรอนิกส์',
     'timezone' => 'Asia/Bangkok',
