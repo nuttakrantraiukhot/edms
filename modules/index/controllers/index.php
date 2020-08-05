@@ -50,22 +50,19 @@ class Controller extends \Gcms\Controller
             self::$menus = \Index\Menu\Controller::init($login);
             // Javascript
             self::$view->addScript('var FIRST_MODULE="'.self::$menus->home().'";');
-            // โหลดค่าติดตั้งโมดูล
-            $dir = ROOT_PATH.'modules/';
-            $f = @opendir($dir);
-            if ($f) {
-                while (false !== ($text = readdir($f))) {
-                    if ($text != '.' && $text != '..' && $text != 'index' && $text != 'css' && $text != 'js' && is_dir($dir.$text)) {
-                        if (is_file($dir.$text.'/controllers/init.php')) {
-                            require_once $dir.$text.'/controllers/init.php';
-                            $className = '\\'.ucfirst($text).'\Init\Controller';
-                            if (method_exists($className, 'execute')) {
-                                $className::execute($request, self::$menus, $login);
-                            }
-                        }
-                    }
+            // โหลดโมดูลที่ติดตั้งแล้ว
+            $modules = \Gcms\Modules::create();
+            foreach ($modules->getControllers('Init') as $className) {
+                if (method_exists($className, 'execute')) {
+                    // โหลดค่าติดตั้งโมดูล
+                    $className::execute($request, $login);
                 }
-                closedir($f);
+            }
+            foreach ($modules->getControllers('Initmenu') as $className) {
+                if (method_exists($className, 'execute')) {
+                    // โหลดค่าติดตั้งโมดูล
+                    $className::execute($request, self::$menus, $login);
+                }
             }
             // Controller หลัก
             $page = createClass('Index\Main\Controller')->execute($request);
@@ -86,8 +83,10 @@ class Controller extends \Gcms\Controller
             $bg_image = '';
         }
         if (is_file(ROOT_PATH.DATA_FOLDER.'images/logo.png')) {
-            $logo = '<img src="'.WEB_URL.DATA_FOLDER.'images/logo.png" alt="{WEBTITLE}">&nbsp;{WEBTITLE}';
+            $logo_image = '<img src="'.WEB_URL.DATA_FOLDER.'images/logo.png" alt="{WEBTITLE}">';
+            $logo = $logo_image.'<span class=mobile>&nbsp;{WEBTITLE}</span>';
         } else {
+            $logo_image = '';
             $logo = '<span class="'.self::$cfg->default_icon.'">{WEBTITLE}</span>';
         }
         // เนื้อหา
@@ -96,6 +95,7 @@ class Controller extends \Gcms\Controller
             '/{MAIN}/' => $page->detail(),
             // โลโก
             '/{LOGO}/' => $logo,
+            '/{LOGOIMAGE}/' => $logo_image,
             // language menu
             '/{LANGUAGES}/' => $languages,
             // title

@@ -105,6 +105,9 @@ window.$K = (function() {
               if (elem.readOnly) {
                 text.readOnly = true;
               }
+              if (obj.type == "currency") {
+                text.digit = floatval(obj.dataset['digit'] ? obj.dataset['digit'] : 2);
+              }
               text.className = elem.className;
               text.initObj = true;
               elem.replace(text);
@@ -132,26 +135,23 @@ window.$K = (function() {
                   if (obj.type == "integer") {
                     obj.dataset["keyboard"] = "1234567890-";
                   } else if (obj.type == "currency") {
-                    obj.dataset["keyboard"] = "1234567890-.";
+                    obj.dataset["keyboard"] = "1234567890-.,";
                   } else if (obj.type == "number" || obj.type == "tel") {
                     obj.dataset["keyboard"] = "1234567890";
                   }
                 }
                 if (obj.dataset["keyboard"]) {
                   obj.pattern = new RegExp("^(?:[" + obj.dataset["keyboard"].preg_quote() + "]+)$");
-                  if (obj.type == "integer" || obj.type == "currency") {
+                  if (obj.type == "integer" || obj.type == "currency" || obj.type == "number") {
                     new GInput(text, obj.dataset["keyboard"], function() {
-                      var val = floatval(this.value);
                       if (obj.min) {
-                        val = Math.max(obj.min, val);
+                        this.value = Math.max(obj.min, floatval(this.value));
                       }
                       if (obj.max) {
-                        val = Math.min(obj.max, val);
+                        this.value = Math.min(obj.max, floatval(this.value));
                       }
                       if (obj.type == "currency") {
-                        this.value = val.toFixed(2);
-                      } else {
-                        this.value = val;
+                        this.value = toCurrency(this.value, this.digit);
                       }
                     });
                   } else {
@@ -286,8 +286,11 @@ window.$K = (function() {
     };
   }
   window.floatval = function(val) {
-    var n = parseFloat(val);
+    var n = parseFloat(typeof val == 'string' ? val.replace(/[^0-9\-\.]/g, '') : val);
     return isNaN(n) ? 0 : n;
+  };
+  window.toCurrency = function(val, digit) {
+    return floatval(val).toFixed(Object.isNull(digit) ? 2 : digit).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   };
   window.round = function(val, digit) {
     var value = Math.round(val * Math.pow(10, digit)) / Math.pow(10, digit);
@@ -338,6 +341,22 @@ window.$K = (function() {
     p.innerText = val;
     div.appendChild(p);
     div.scrollTop = div.scrollHeight;
+  };
+  window.timeToMinute = function(time) {
+    var sp = time.split(':');
+    if (sp.length == 1) {
+      return 0;
+    } else {
+      return (floatval(sp[0]) * 60) + floatval(sp[1]);
+    }
+  };
+  window.timeToSecond = function(time) {
+    var sp = time.split(':');
+    if (sp.length == 1) {
+      return 0;
+    } else {
+      return (floatval(sp[0]) * 60) + (floatval(sp[1] * 60) + floatval(sp[2]));
+    }
   };
   Function.prototype.bind = function(o) {
     var __method = this;
@@ -423,18 +442,13 @@ window.$K = (function() {
     return d;
   };
   Date.prototype.compare = function(d) {
-    var date, month, year;
     if (Object.isString(d)) {
-      var ds = d.replace(/\//g, '-').split("-");
-      year = floatval(ds[0]);
-      month = floatval(ds[1]) - 1;
-      date = floatval(ds[2]);
-    } else {
-      date = d.getDate();
-      month = d.getMonth();
-      year = d.getFullYear();
+      d = new Date(d.replace(/-/g, '/'));
     }
-    var dateStr = this.getDate(),
+    var date = d.getDate(),
+      month = d.getMonth(),
+      year = d.getFullYear(),
+      dateStr = this.getDate(),
       monthStr = this.getMonth(),
       yearStr = this.getFullYear(),
       theYear = yearStr - year,
@@ -1135,23 +1149,25 @@ window.$K = (function() {
       return false;
     },
     addClass: function(v) {
-      if (!v) {
-        this.className = "";
-      } else {
-        var rm = v.split(" ");
-        var cs = [];
-        forEach(this.className.split(" "), function(c) {
-          if (c !== "" && rm.indexOf(c) == -1) {
-            cs.push(c);
-          }
-        });
-        cs.push(v);
-        this.className = cs.join(" ");
+      if (this.className || this.className === '') {
+        if (!v) {
+          this.className = "";
+        } else {
+          var rm = v.split(" "),
+            cs = [];
+          forEach(this.className.split(" "), function(c) {
+            if (c !== "" && rm.indexOf(c) == -1) {
+              cs.push(c);
+            }
+          });
+          cs.push(v);
+          this.className = cs.join(" ");
+        }
       }
       return this;
     },
     removeClass: function(v) {
-      if (!Object.isNull(this.className)) {
+      if (this.className || this.className === '') {
         var rm = v.split(" ");
         var cs = [];
         forEach(this.className.split(" "), function(c) {
@@ -1164,7 +1180,7 @@ window.$K = (function() {
       return this;
     },
     replaceClass: function(source, replace) {
-      if (!Object.isNull(this.className)) {
+      if (this.className || this.className === '') {
         var rm = (replace + " " + source).split(" ");
         var cs = [];
         forEach(this.className.split(" "), function(c) {
@@ -1266,7 +1282,7 @@ window.$K = (function() {
       return this;
     },
     addEvent: function(t, f, c) {
-      var ts = t.split(" "),
+      var ts = t.split(/[\s,]/),
         input = this;
       forEach(ts, function(e) {
         if (input.addEventListener) {
@@ -2709,6 +2725,10 @@ window.$K = (function() {
           self._draw();
         }
         var caret = self.input.getCaretPosition();
+        if (caret.start == 5 && caret.end == 5) {
+          caret.start = 0;
+          caret.end = 2;
+        }
         self._setCaret(caret.start);
         self.firstKey = null;
       };
@@ -3020,7 +3040,7 @@ window.$K = (function() {
         this.panel.style.zIndex = 1001;
         this.input.readOnly = true;
         this.input.addEvent("click", function(e) {
-          self.input.select();
+          self.input.setCaretPosition(self.input.value.length, 1);
           self._draw();
           GEvent.stop(e);
           return false;
@@ -3270,7 +3290,9 @@ window.$K = (function() {
       this.placeholder.style.display =
         this.hidden_value == "" ? "block" : "none";
       this.hidden.value = this.hidden_value;
-      this.hidden.callEvent("change");
+      if (this.hidden.callEvent) {
+        this.hidden.callEvent("change");
+      }
     },
     _toogle: function(e) {
       if (this.calendar.style.display == "block") {
@@ -3478,19 +3500,24 @@ window.$K = (function() {
               canclick = cell.oDate <= this.xdate;
             }
             if (canclick) {
-              $G(cell).addEvent("click", function(e) {
-                if (self.date === null) {
-                  self.date = new Date();
-                }
-                self.date.setTime(this.oDate.valueOf());
-                self._dochanged();
-                var input = $E(self.input);
-                input.focus();
-              });
               cls = tmp_month == intmonth ? "curr" : "ex";
             } else {
               cls = "ex";
             }
+            $G(cell).addEvent("click", function(e) {
+              var c = this.hasClass('curr ex'),
+                input = $E(self.input);
+              if (c == 'curr') {
+                if (self.date === null) {
+                  self.date = new Date();
+                }
+                self.date.setTime(this.oDate.valueOf());
+              } else if (c == 'ex') {
+                self.date = null;
+              }
+              self._dochanged();
+              input.focus();
+            });
             if (tmp_year == sel_year && tmp_month == sel_month && pointer == sel_date) {
               cls = cls + " select";
             }

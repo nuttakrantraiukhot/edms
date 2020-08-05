@@ -10,6 +10,7 @@
  *
  * @see http://www.kotchasan.com/
  */
+
 /**
  * การแสดงข้อผิดพลาด
  * 0 บันทึกข้อผิดพลาดร้ายแรงลง error_log .php (ขณะใช้งานจริง)
@@ -189,7 +190,12 @@ function createClass($className, $param = null)
  */
 function debug($expression)
 {
-    echo '<script>console.log("'.htmlspecialchars(stripslashes(str_replace(array("\r", "\n"), '', var_export($expression, true)))).'")</script>';
+    if (is_array($expression) || is_object($expression)) {
+        $content = json_encode((array) $expression);
+    } else {
+        $content = '"'.str_replace(array('/', '"'), array('\/', '\"'), $expression).'"';
+    }
+    echo '<script>console.log('.$content.')</script>';
 }
 /*
  * custom error handler

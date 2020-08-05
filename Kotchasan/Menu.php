@@ -30,12 +30,12 @@ class Menu
     {
         $menus = array();
         foreach ($items as $alias => $values) {
-            if (isset($values['submenus'])) {
+            if (isset($values['url'])) {
+                $menus[] = self::getItem($alias, $values, false, $select).'</li>';
+            } elseif (isset($values['submenus'])) {
                 $menus[] = self::getItem($alias, $values, true, $select).'<ul>';
                 $menus[] = self::render($values['submenus'], $select);
                 $menus[] = '</ul>';
-            } else {
-                $menus[] = self::getItem($alias, $values, false, $select).'</li>';
             }
         }
 
@@ -75,9 +75,9 @@ class Menu
         }
         $a = isset($a) ? ' '.implode(' ', $a) : '';
         if ($arrow) {
-            return '<li'.$c.'><a class=menu-arrow'.$a.'><span>'.(empty($item['text']) ? '&nbsp;' : htmlspecialchars_decode($item['text'])).'</span></a>';
+            return '<li'.$c.'><a class=menu-arrow'.$a.'><span>'.(empty($item['text']) ? '&nbsp;' : strip_tags(htmlspecialchars_decode($item['text']))).'</span></a>';
         } else {
-            return '<li'.$c.'><a'.$a.'><span>'.(empty($item['text']) ? '&nbsp;' : htmlspecialchars_decode($item['text'])).'</span></a>';
+            return '<li'.$c.'><a'.$a.'><span>'.(empty($item['text']) ? '&nbsp;' : strip_tags(htmlspecialchars_decode($item['text']))).'</span></a>';
         }
     }
 }

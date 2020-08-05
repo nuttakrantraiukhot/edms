@@ -87,7 +87,7 @@ return array(
   'Enter your password again' => 'ໃສ່ລະຫັດຜ່ານອີກຄັ້ງ',
   'entries' => 'ລາຍການ',
   'Expiration date' => 'ວັນໝົດອາຍຸ',
-  'Fax' => 'ໂທລະສານ',
+  'Fax' => 'ແຟັກ',
   'File' => 'ແຟ້ມ',
   'File name' => 'ຊື່ແຟ້ມຂໍ້ມູນ',
   'File not found' => 'ບໍ່ພົບແຟ້ມທີ່ຕ້ອງການ',
@@ -101,11 +101,11 @@ return array(
   'Height' => 'ສູງ',
   'Home' => 'ໜ້າຫຼັກ',
   'How to define user authentication for mail servers. If you enable it, you must configure below correctly.' => 'ກຳນົດວິທີການກວດສອບຜູ້ໃຊ້ສຳລັບເມນເຊິບເວີຫາກທ່ານເປີດໃຊ້ການທ່ານຕ້ອງກຳນົດຄ່າຕ່າງໆດ້ານລຸ່ມຖືກຕ້ອງ',
-  'Identification No.' => 'ເລກບັດປະຊາຊົນ',
+  'Identification No.' => 'ເລກບັດປະຈຳຕົວ',
   'Image' => 'ຮູບພາບ',
   'Image size is in pixels' => 'ຂະໜາດຂອງຮູບພາບເປັນພິກເຊວ',
   'Import' => 'ນຳເຂົ້າ',
-  'Incorrect :name' => ':name ບໍ່ຖືກຕ້ອງ',
+  'Invalid :name' => ':name ບໍ່ຖືກຕ້ອງ',
   'Job today' => 'ວຽກຊ່ອມວັນນີ້',
   'Key' => 'ແປ້ນພີມ',
   'Language' => 'ພາສາ',
@@ -126,7 +126,8 @@ return array(
   'Mail server settings' => 'ຄ່າກຳນົດຂອງເມວເຊີບເວີ',
   'MAIL_PROGRAMS' => array(
     0 => 'ສົ່ງຈົດໝາຍດ້ວຍ PHP',
-    1 => 'ສົ່ງຈົດໝາຍດ້ວຍ PHPMailer (ແນະນຳ)'
+    1 => 'ສົ່ງຈົດໝາຍດ້ວຍ PHPMailer+SMTP (ແນະນຳ)',
+    2 => 'ສົ່ງຈົດໝາຍດ້ວຍ PHPMailer+PHP Mail'
   ),
   'Manage languages' => 'ຈັດການພາສາ',
   'Member list' => 'ລາຍຊື່ສະມາຊິກ',
@@ -177,7 +178,7 @@ return array(
   'PERMISSIONS' => array(
     'can_config' => 'ສາມາດຕັ້ງຄ່າລະບົບໄດ້'
   ),
-  'Phone' => 'ໂທລະສັບ',
+  'Phone' => 'ເບີໂທລະສັບ',
   'Please fill in' => 'ກະລຸນາຕື່ມຂໍ້ມູນໃສ່',
   'please select' => 'ກະລຸນາເລືອກ',
   'Please select :name at least one item' => 'ກະລຸນາເລືອກ :name ຢ່າງໜ້ອຍ 1 ລາຍການ',
@@ -185,7 +186,7 @@ return array(
   'Profile' => 'ຂໍ້ມູນສ່ວນຕົວ',
   'Province' => 'ແຂວງ',
   'PUBLISHEDS' => array(
-    0 => 'ໂຈະການພິມເຜີຍແຜ່',
+    0 => 'ລະງັບການເຜີຍແຜ່',
     1 => 'ເຜີຍແຜ່'
   ),
   'Register' => 'ສະໝັກສະມາຊິກ',
@@ -252,9 +253,9 @@ return array(
   'When download' => 'ເມື່ອກົດດາວໂຫຼດ',
   'Width' => 'ກວ້າງ',
   'With selected' => 'ເຮັດກັບທີ່ເລືອກ',
-  'YEAR_OFFSET' => 543,
+  'YEAR_OFFSET' => 0,
   'You want to' => 'ທ່ານຕ້ອງການ',
-  'Your message was sent successfully' => 'ສົ່ງຂໍ້ຄວາມສຳເລັດໄປຫາຜູ້ທີ່ກ່ຽວຂ້ອງ',
+  'Your message was sent successfully' => 'ສົ່ງຂໍ້ຄວາມໄປຫາບຸກຄົນທີ່ກ່ຽວຂ້ອງ.',
   'Your new password is' => 'ລະຫັດຜ່ານໃໝ່ຂອງທ່ານຄື',
   'Zipcode' => 'ລະຫັດໄປສະນີ'
 );

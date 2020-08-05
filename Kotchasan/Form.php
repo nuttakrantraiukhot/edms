@@ -223,6 +223,21 @@ class Form extends \Kotchasan\KBase
      *
      * @return \static
      */
+    public static function integer($attributes = array())
+    {
+        $obj = new static();
+        $obj->tag = 'input';
+        $attributes['type'] = 'integer';
+        $obj->attributes = $attributes;
+
+        return $obj;
+    }
+
+    /**
+     * @param array $attributes
+     *
+     * @return \static
+     */
     public static function password($attributes = array())
     {
         $obj = new static();
@@ -309,7 +324,9 @@ class Form extends \Kotchasan\KBase
                     $prop['title'] = 'title="'.strip_tags($v).'"';
                     break;
                 default:
-                    if (is_int($k)) {
+                    if ($k == 'id') {
+                        $id = $v;
+                    } elseif (is_int($k)) {
                         $prop[$v] = $v;
                     } elseif ($v === true) {
                         $prop[$k] = $k;
@@ -323,9 +340,13 @@ class Form extends \Kotchasan\KBase
                     break;
             }
         }
-        if (isset($id) && empty($name)) {
-            $name = $id;
-            $prop['name'] = 'name="'.$name.'"';
+        if (isset($id)) {
+            if (empty($name)) {
+                $name = $id;
+                $prop['name'] = 'name="'.$name.'"';
+            }
+            $id = trim(preg_replace('/[\[\]]+/', '_', $id), '_');
+            $prop['id'] = 'id="'.$id.'"';
         }
         if (isset(Html::$form)) {
             if (isset($id) && Html::$form->gform) {
@@ -468,7 +489,7 @@ class Form extends \Kotchasan\KBase
             } else {
                 if (isset($dataPreview)) {
                     $input .= '<div class="file-preview" id="'.$dataPreview.'">';
-                    $input .= isset($previewSrc) ? '<div class="file-thumb" style="background-image:url('.$previewSrc.')"></div>' : '';
+                    $input .= isset($previewSrc) ? '<a href="'.$previewSrc.'" target="preview" class="file-thumb" style="background-image:url('.$previewSrc.')"></a>' : '';
                     $input .= '</div>';
                 }
                 if (isset($label) && isset($id)) {

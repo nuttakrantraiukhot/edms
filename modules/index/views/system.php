@@ -138,6 +138,29 @@ class View extends \Gcms\View
             'value' => $notDemoMode && isset($config->facebook_appId) ? $config->facebook_appId : '',
         ));
         $fieldset = $form->add('fieldset', array(
+            'titleClass' => 'icon-line',
+            'title' => '{LNG_LINE Notify}',
+        ));
+        $groups = $fieldset->add('groups', array(
+            'comment' => '{LNG_Send notification messages When making a transaction}',
+        ));
+        // line_api_key
+        $groups->add('text', array(
+            'id' => 'line_api_key',
+            'labelClass' => 'g-input icon-password',
+            'itemClass' => 'width90',
+            'label' => '{LNG_Access token} <a href="https://gcms.in.th/index.php?module=howto&id=367" class=icon-help></a>',
+            'value' => isset(self::$cfg->line_api_key) ? self::$cfg->line_api_key : '',
+        ));
+        $groups->add('button', array(
+            'id' => 'line_test',
+            'itemClass' => 'width10',
+            'labelClass' => 'g-input',
+            'class' => 'magenta button wide center icon-chat',
+            'label' => '&nbsp;',
+            'value' => 'Test',
+        ));
+        $fieldset = $form->add('fieldset', array(
             'title' => '{LNG_Style}',
         ));
         // bg_color

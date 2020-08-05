@@ -54,6 +54,7 @@ class Model extends \Kotchasan\KBase
                 $config->google_client_id = $request->post('google_client_id')->text();
                 $config->bg_color = $request->post('bg_color')->filter('#ABCDEF0-9');
                 $config->color = $request->post('color')->filter('#ABCDEF0-9');
+                $config->line_api_key = $request->post('line_api_key')->topic();
                 if (empty($ret)) {
                     // อัปโหลดไฟล์
                     $dir = ROOT_PATH.DATA_FOLDER.'images/';

@@ -64,6 +64,12 @@ function defaultSubmit(ds) {
       console.log(val);
     } else if (prop == "alert") {
       _alert = val;
+    } else if (prop == "message") {
+      document.body.msgBox(trans(val));
+    } else if (prop == "warning") {
+      document.body.msgBox(trans(val), 'warning');
+    } else if (prop == "tip") {
+      document.body.msgBox(trans(val), 'tip', false);
     } else if (prop == "modal") {
       if (val == "close") {
         if (modal) {
@@ -321,23 +327,15 @@ function checkPassword() {
 }
 
 function checkIdcard() {
-  var value = this.value;
-  var ids = this.id.split("_");
-  var id = "&id=" + floatval($E(ids[0] + "_id").value);
-  var i, sum;
+  var value = this.value,
+    ids = this.id.split("_"),
+    id = "&id=" + floatval($E(ids[0] + "_id").value);
   if (value.length == 0) {
     this.reset();
-  } else if (value.length != 13) {
+  } else if (value.length < 9) {
     this.invalid(this.title);
   } else {
-    for (i = 0, sum = 0; i < 12; i++) {
-      sum += floatval(value.charAt(i)) * (13 - i);
-    }
-    if ((11 - (sum % 11)) % 10 != floatval(value.charAt(12))) {
-      this.invalid(this.title);
-    } else {
-      return "value=" + encodeURIComponent(value) + "&id=" + id;
-    }
+    return "value=" + encodeURIComponent(value) + "&id=" + id;
   }
 }
 
@@ -388,6 +386,9 @@ function replaceURL(key, value) {
 function initSystem() {
   new Clock("local_time");
   new Clock("server_time");
+  callClick('line_test', function() {
+    send("index.php/index/model/line/test", "id=" + $E('line_api_key').value);
+  });
 }
 
 function selectMenu(module) {
@@ -697,9 +698,10 @@ function initWeb(module) {
   loader = new GLoader(
     WEB_URL + module + "loader.php/index/controller/loader/index",
     function(xhr) {
-      var scroll_to = "scroll-to";
-      var content = $G("content");
-      var datas = xhr.responseText.toJSON();
+      var scroll_to = "scroll-to",
+        content = $G("content"),
+        datas = xhr.responseText.toJSON();
+      document.body.onkeydown = null;
       if (datas) {
         for (var prop in datas) {
           var value = datas[prop];
@@ -743,4 +745,17 @@ function initWeb(module) {
 }
 if (navigator.userAgent.match(/(iPhone|iPod|iPad)/i)) {
   document.addEventListener("touchstart", function() {}, false);
+}
+
+function barcodeEnabled(inputs) {
+  $G(window).Ready(function() {
+    forEach(inputs, function(item) {
+      $G(item).addEvent('keydown', function(e) {
+        if (GEvent.keyCode(e) == 13) {
+          GEvent.stop(e);
+          return false;
+        }
+      });
+    });
+  });
 }

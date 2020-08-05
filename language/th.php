@@ -105,7 +105,7 @@ return array(
   'Image' => 'รูปภาพ',
   'Image size is in pixels' => 'ขนาดของรูปภาพเป็นพิกเซล',
   'Import' => 'นำเข้า',
-  'Incorrect :name' => ':name ไม่ถูกต้อง',
+  'Invalid :name' => ':name ไม่ถูกต้อง',
   'Job today' => 'งานซ่อมวันนี้',
   'Key' => 'คีย์',
   'Language' => 'ภาษา',
@@ -126,7 +126,8 @@ return array(
   'Mail server settings' => 'ค่ากำหนดของเมล์เซิร์ฟเวอร์',
   'MAIL_PROGRAMS' => array(
     0 => 'ส่งจดหมายด้วย PHP',
-    1 => 'ส่งจดหมายด้วย PHPMailer (แนะนำ)'
+    1 => 'ส่งจดหมายด้วย PHPMailer+SMTP (แนะนำ)',
+    2 => 'ส่งจดหมายด้วย PHPMailer+PHP Mail'
   ),
   'Manage languages' => 'จัดการภาษา',
   'Member list' => 'รายชื่อสมาชิก',
