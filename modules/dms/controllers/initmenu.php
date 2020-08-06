@@ -68,7 +68,7 @@ class Controller extends \Kotchasan\KBase
 
         }
         if (!empty($submenus)) {
-            //$menu->add('settings', '{LNG_Document management system}', null, $submenus, 'edms');
+            $menu->add('settings', '{LNG_Document management system}', null, $submenus, 'edms');
         }
     }
 }
